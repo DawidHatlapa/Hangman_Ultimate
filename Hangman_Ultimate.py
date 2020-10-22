@@ -18,12 +18,12 @@ def menu():
 
 
 def game_level():
-    # ustawia liczbę żyć
+    # set amount of lives 
 
     print('Choose difficulty level: \n 1 - Easy \n 2 - Medium \n 3 - Hard')
     level_ok = False
 
-    # ustawia poziom gry - liczbę żyć,
+    # set level of the game
     while level_ok == False:
         try:
             level = int(input('Enter number: '))
@@ -61,7 +61,7 @@ def game(random_word):
         print(' '.join(table))
         print(' ')
 
-        # gracz wybiera literę
+        # player choose the letter
         print('If you wanna quit game - write QUIT anytime!')
         print('Select a letter')
         letter = input().lower()
@@ -73,15 +73,15 @@ def game(random_word):
                     print(letter + " was already used!")
                     amount_of_lives -= 1
             else:
-                    # odgadnięcie hasła
+                    # guess password
                 if letter in password.lower():
 
-                        # _ zamienia się w odgadniętą literę
+                        # _ turn into guessed letter
                     for i in range(len(password)):
                         if(password[i].lower() == letter):
                             table[i] = password[i]
-                    # sprawdza czy ilość _ = ilości liter w haśle
-                    # sprawdza czy graczowi udało się odgadnąć hasło            
+                    # check _ = amount of letters in the password
+                    # check if the player has guessed the password        
                     if ''.join(map(str, table)) == password:
                         print('')
                         print(nickname, ' has ', amount_of_lives, ' lives left')
@@ -90,7 +90,7 @@ def game(random_word):
                         print(' ')
                         print(nickname, ' Victory!')
                         break
-                    # gdy gracz nie odgadnie
+                    # when the player fails to guess
                 else:
                     amount_of_lives -= 1
 
@@ -101,17 +101,17 @@ def game(random_word):
         
 
 def random_word():
-    # otwiera plik 
+    # open file 
     my_file = open('countries.txt', 'r', encoding = 'UTF-8' )
     
-    # lista losowanych haseł
+    # list of random passwords
     password_all = my_file.read()
     password_list = password_all.split('\n')
 
-    #funkcja losująca hasło 
+    # random password
     password = str(password_list[random.randint(0,len(password_list)-1)])
     table = list(password)
-    #table -> powoduje wyświetlenie się _ _ _ w zależności od ilości liter danego hasła
+    #table -> show _ _ _ depending on amount of letters
     for i in range(len(password)):
         table[i] = '_'
 
@@ -119,7 +119,7 @@ def random_word():
 
 
 def lives(amount_of_lives):
-    # rysuje serca w zależności od ilości żyć
+    # draw hearts depending on the number of lives
     lives = amount_of_lives
     for i in range(lives):
         i += 1
